@@ -118,9 +118,8 @@ public class resume_game extends Activity {
 
     protected void scramble_board (){
 
-        int[] empty_index;
-        //int x_position = -1;
-        //int y_position = -1;
+        int x_position = -1;
+        int y_position = -1;
         int[]  up_neighbor = new int[] {-1,-1};
         int[]  down_neighbor = new int[] {-1,-1};
         int[]  left_neighbor = new int[] {-1,-1};
@@ -128,26 +127,32 @@ public class resume_game extends Activity {
 
 
         //find blank space
-        empty_index = find_empty();
-
+        for(int x=0; x<4; x++){
+            for(int y=0; y<4; y++){
+                if(board[x][y]== 0){
+                    x_position=x;
+                    y_position=y;
+                }
+            }
+        }
 
         //fill neighbors
 
-        up_neighbor = new int[]{(empty_index[0]- 1), empty_index[1]};
-        down_neighbor = new int[] {(empty_index[0] + 1), empty_index[1]};
-        left_neighbor = new int[] {empty_index[0], (empty_index[1] - 1)};
-        right_neighbor = new int[] {empty_index[0], (empty_index[1] + 1)};
+        up_neighbor = new int[]{(x_position - 1), y_position};
+        down_neighbor = new int[] {(x_position + 1), y_position};
+        left_neighbor = new int[] {x_position, (y_position - 1)};
+        right_neighbor = new int[] {x_position, (y_position + 1)};
 
 
-        if(empty_index[0]==0){
+        if(x_position ==0){
             up_neighbor = null;
-        }else if(empty_index[0] == 3){
+        }else if(x_position == 3){
             down_neighbor = null;
         }
 
-        if (empty_index[1] == 0){
+        if (y_position == 0){
             left_neighbor = null;
-        }else if (empty_index[1] == 3){
+        }else if (y_position == 3){
             right_neighbor = null;
         }
 
@@ -168,20 +173,7 @@ public class resume_game extends Activity {
 
     }
 
-    protected int[] find_empty (){
 
-        int [] empty_index = new int[] {-1,-1};
-
-        for(int x=0; x<4; x++){
-            for(int y=0; y<4; y++){
-                if(board[x][y]== 0){
-                    empty_index[0]=x;
-                    empty_index[1]=y;
-                }
-            }
-        }
-        return empty_index;
-    }
 
     protected void enable_button(int[] button_index){
 
