@@ -204,6 +204,11 @@ public class resume_game extends Activity {
             //neighbors[3] = null;
         }
 
+        Log.d(TAG, "Index of  all neighbors 0 move " + neighbors[0][0] + " " + neighbors[0][1]);
+        Log.d(TAG, "Index of  all neighbors 1 move " + neighbors[1][0] + " " + neighbors[1][1]);
+        Log.d(TAG, "Index of  all neighbors 2 move " + neighbors[2][0] + " " + neighbors[2][1]);
+        Log.d(TAG, "Index of  all neighbors 3 move " + neighbors[3][0] + " " + neighbors[3][1]);
+
         return neighbors;
     }
 
@@ -316,21 +321,28 @@ public class resume_game extends Activity {
 
     protected void move_random(int[][] neighbors, int[] empty_index){
 
+        Random rand = new Random();
         int possible_moves=0;
         int neighbor_to_move=0;
         int[] invalid_index = {-1,-1};
-        Random rand = new Random();
+        int invalid = -1;
 
-        for(int i=0; i<4;i++){
-            if(neighbors[i] != invalid_index){
+        for(int a=0; a<4;a++){
+            if (neighbors[a][0] != invalid) {
                 possible_moves++;
+                Log.d(TAG, "Neighbors " + "[" + a + "] = "+ neighbors[a][0] + invalid);
+                Log.d(TAG, "Possible moves" + possible_moves);
             }
+
         }
 
 
-        while(neighbors[neighbor_to_move] == invalid_index ) {
-            neighbor_to_move = rand.nextInt(possible_moves);
-        }
+        // Find out why it does not rand other positions
+        Log.d(TAG, "Neighbors while " + "[" + neighbor_to_move + "] = "+ neighbors[neighbor_to_move][0] + invalid);
+         do{
+            neighbor_to_move = rand.nextInt(4);
+            Log.d(TAG, "Random number" + neighbor_to_move);
+        }while(neighbors[neighbor_to_move][0] == invalid);
 
         Log.d(TAG, "Index of blank in move_random" + empty_index[0]+" "+empty_index[1]);
         //Log.d(TAG, "Index of  all neighbors 0 move " + neighbors[0][0] + " " + neighbors[0][1]);
@@ -340,6 +352,7 @@ public class resume_game extends Activity {
 
         //swap 0(empty) and neighbor  === array
         int temp = board[empty_index[0]][empty_index[1]];
+        //Find out why it comes here even though it is an invalid index (while)
         board[empty_index[0]] [empty_index[1]] = board[neighbors[neighbor_to_move][0]][neighbors[neighbor_to_move][1]];
         board[neighbors[neighbor_to_move][0]][neighbors[neighbor_to_move][1]] = temp;
 
