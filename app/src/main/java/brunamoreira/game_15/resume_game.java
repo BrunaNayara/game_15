@@ -191,7 +191,8 @@ public class resume_game extends Activity {
         if(empty_index[0] !=0){
             neighbors[0] = new int[]  {(empty_index[0] - 1), empty_index[1]};
             //neighbors[0] = null;
-        }else if(empty_index[0] != 3){
+        }
+        if(empty_index[0] != 3){
             neighbors[1] = new int[] {(empty_index[0] + 1), empty_index[1]};
             //neighbors[1] = null;
         }
@@ -199,7 +200,8 @@ public class resume_game extends Activity {
         if (empty_index[1]!= 0){
             neighbors[2] = new int[] {empty_index[0], (empty_index[1] - 1)};
             //neighbors[2] = null;
-        }else if (empty_index[1] != 3){
+        }
+        if (empty_index[1] != 3){
             neighbors[3] = new int[] {empty_index[0], (empty_index[1]+ 1)};
             //neighbors[3] = null;
         }
