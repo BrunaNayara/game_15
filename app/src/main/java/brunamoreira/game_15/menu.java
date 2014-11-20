@@ -1,17 +1,37 @@
 package brunamoreira.game_15;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 
 public class menu extends Activity {
+
+
+    Button bt_start;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
+        bt_start = (Button) findViewById(R.id.button_start);
+
+
+        View.OnClickListener start_listener = new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent start_intent = new Intent(menu.this, resume_game.class);
+                startActivity(start_intent);
+            }
+        };
+        bt_start.setOnClickListener(start_listener);
+
     }
 
 
