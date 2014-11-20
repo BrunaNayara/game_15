@@ -112,14 +112,16 @@ public class resume_game extends Activity {
         Random rand = new Random();
         int total_movements = rand.nextInt(500) + 200;
         int[] invalid_index = {-1,-1};
+        int[] empty_index = new int[]{-1, -1};
+        int[][] neighbors = new int[][]{{-1, -1}, {-1, -1}, {-1, -1}, {-1, -1}};
 
         for(int movements=0; movements<total_movements;movements++) {
-            int[] empty_index = new int[]{-1, -1};
-            int[][] neighbors = new int[][]{{-1, -1}, {-1, -1}, {-1, -1}, {-1, -1}};
+            empty_index = new int[]{-1, -1};
+            neighbors = new int[][]{{-1, -1}, {-1, -1}, {-1, -1}, {-1, -1}};
 
 
             //disable all buttons
-            disable_all_buttons();
+            //disable_all_buttons();
 
             //find blank space
             empty_index = find_empty();
@@ -128,6 +130,7 @@ public class resume_game extends Activity {
             //fill neighbors
             neighbors = fill_neighbors_indexes(empty_index);
 
+            /*
             //enable neighbor
             if (neighbors[0] != invalid_index) {
                 enable_button(neighbors[0]);
@@ -141,42 +144,45 @@ public class resume_game extends Activity {
             if (neighbors[3] != invalid_index) {
                 enable_button(neighbors[3]);
             }
+            */
 
-            Log.d(TAG, "Index of  all neighbors 0 scramble " + neighbors[0][0] + " " + neighbors[0][1]);
-            Log.d(TAG, "Index of  all neighbors 1 scramble " + neighbors[1][0] + " " + neighbors[1][1]);
-            Log.d(TAG, "Index of  all neighbors 2 scramble " + neighbors[2][0] + " " + neighbors[2][1]);
-            Log.d(TAG, "Index of  all neighbors 3 scramble " + neighbors[3][0] + " " + neighbors[3][1]);
+            // Log.d(TAG, "Index of  all neighbors 0 scramble " + neighbors[0][0] + " " + neighbors[0][1]);
+            //Log.d(TAG, "Index of  all neighbors 1 scramble " + neighbors[1][0] + " " + neighbors[1][1]);
+            //Log.d(TAG, "Index of  all neighbors 2 scramble " + neighbors[2][0] + " " + neighbors[2][1]);
+            //Log.d(TAG, "Index of  all neighbors 3 scramble " + neighbors[3][0] + " " + neighbors[3][1]);
 
 
             //make a move
             move_random(neighbors, empty_index);
-
-
-            //disable all buttons
-            disable_all_buttons();
-
-            //find blank space
-            empty_index = find_empty();
-
-
-            //fill neighbors
-            neighbors = fill_neighbors_indexes(empty_index);
-
-            //enable neighbor
-            if (neighbors[0] != invalid_index) {
-                enable_button(neighbors[0]);
-            }
-            if (neighbors[1] != invalid_index) {
-                enable_button(neighbors[1]);
-            }
-            if (neighbors[2] != invalid_index) {
-                enable_button(neighbors[2]);
-            }
-            if (neighbors[3] != invalid_index) {
-                enable_button(neighbors[3]);
-            }
-
         }
+
+        //disable all buttons
+        disable_all_buttons();
+
+        //find blank space
+        empty_index = find_empty();
+
+
+        //fill neighbors
+        neighbors = fill_neighbors_indexes(empty_index);
+
+        //enable neighbor
+        if (neighbors[0] != invalid_index) {
+            enable_button(neighbors[0]);
+        }
+        if (neighbors[1] != invalid_index) {
+            enable_button(neighbors[1]);
+        }
+        if (neighbors[2] != invalid_index) {
+            enable_button(neighbors[2]);
+        }
+        if (neighbors[3] != invalid_index) {
+            enable_button(neighbors[3]);
+        }
+
+
+
+
     }
 
     protected void disable_all_buttons(){
@@ -208,46 +214,62 @@ public class resume_game extends Activity {
             switch (button_index[1]){
                 case 0:
                     bt_1.setEnabled(true);
+                    break;
                 case 1:
                     bt_2.setEnabled(true);
+                    break;
                 case 2:
                     bt_3.setEnabled(true);
+                    break;
                 case 3:
                     bt_4.setEnabled(true);
+                    break;
             }
         }else if(button_index[0]==1) {
             switch (button_index[1]) {
                 case 0:
                     bt_5.setEnabled(true);
+                    break;
                 case 1:
                     bt_6.setEnabled(true);
+                    break;
                 case 2:
                     bt_7.setEnabled(true);
+                    break;
                 case 3:
                     bt_8.setEnabled(true);
+                    break;
             }
         }else if(button_index[0]==2) {
             switch (button_index[1]) {
                 case 0:
                     bt_9.setEnabled(true);
+                    break;
                 case 1:
                     bt_10.setEnabled(true);
+                    break;
                 case 2:
                     bt_11.setEnabled(true);
+                    break;
                 case 3:
                     bt_12.setEnabled(true);
+                    break;
             }
         }
         else if(button_index[0]==3) {
             switch (button_index[1]) {
                 case 0:
                     bt_13.setEnabled(true);
+                    break;
                 case 1:
                     bt_14.setEnabled(true);
+                    break;
                 case 2:
                     bt_15.setEnabled(true);
+                    break;
                 case 3:
                     bt_16.setEnabled(true);
+                    break;
             }
         }
 
@@ -384,20 +406,28 @@ public class resume_game extends Activity {
         //Log.d(TAG, "Index of  all neighbors 3 move " + neighbors[3][0] + " " + neighbors[3][1]);
 
         //swap 0(empty) and neighbor  === array
+       /*
         int temp = board[empty_index[0]][empty_index[1]];
-        //Find out why it comes here even though it is an invalid index (while)
         board[empty_index[0]] [empty_index[1]] = board[neighbors[neighbor_to_move][0]][neighbors[neighbor_to_move][1]];
         board[neighbors[neighbor_to_move][0]][neighbors[neighbor_to_move][1]] = temp;
+        */
+
+        move_in_array(empty_index, neighbors[neighbor_to_move]);
 
 
         //swap button Text   === screen
         Button empty = button_from_index(empty_index);
         Button bt_movement = button_from_index(neighbors[neighbor_to_move]);
-
         move_button_text(empty, bt_movement);
 
 
 
+    }
+
+    protected void move_in_array(int[] empty_index, int[]neighbor){
+        int temp = board[empty_index[0]][empty_index[1]];
+        board[empty_index[0]] [empty_index[1]] = board[neighbor[0]][neighbor[1]];
+        board[neighbor[0]][neighbor[1]] = temp;
     }
 
     protected void move_button_text(Button empty, Button move){
@@ -407,6 +437,9 @@ public class resume_game extends Activity {
         move.setText(temp);
 
     }
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
