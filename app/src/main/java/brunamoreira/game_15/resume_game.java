@@ -62,22 +62,7 @@ public class resume_game extends Activity {
         bt_16 = (Button) findViewById(R.id.button16);
         bt_scramble = (Button) findViewById(R.id.button_scramble);
 
-        bt_1.setEnabled(false);
-        bt_2.setEnabled(false);
-        bt_3.setEnabled(false);
-        bt_4.setEnabled(false);
-        bt_5.setEnabled(false);
-        bt_6.setEnabled(false);
-        bt_7.setEnabled(false);
-        bt_8.setEnabled(false);
-        bt_9.setEnabled(false);
-        bt_10.setEnabled(false);
-        bt_11.setEnabled(false);
-        bt_12.setEnabled(false);
-        bt_13.setEnabled(false);
-        bt_14.setEnabled(false);
-        bt_15.setEnabled(false);
-        bt_16.setEnabled(false);
+        disable_all_buttons();
 
 
         View.OnClickListener scramble = new View.OnClickListener() {
@@ -126,44 +111,145 @@ public class resume_game extends Activity {
 
         Random rand = new Random();
         int total_movements = rand.nextInt(500) + 200;
-
-        int[] empty_index = new int[] {-1,-1};
-        int[][] neighbors = new int[][]{{-1,-1}, {-1,-1}, {-1,-1}, {-1,-1}};
         int[] invalid_index = {-1,-1};
 
+        for(int movements=0; movements<total_movements;movements++) {
+            int[] empty_index = new int[]{-1, -1};
+            int[][] neighbors = new int[][]{{-1, -1}, {-1, -1}, {-1, -1}, {-1, -1}};
 
 
-        //find blank space
-        empty_index = find_empty();
+            //disable all buttons
+            disable_all_buttons();
+
+            //find blank space
+            empty_index = find_empty();
 
 
-        //fill neighbors
-        neighbors = fill_neighbors_indexes(empty_index);
+            //fill neighbors
+            neighbors = fill_neighbors_indexes(empty_index);
 
-        //enable neighbor
-        if(neighbors[0] !=invalid_index){
-            enable_button(neighbors[0]);
+            //enable neighbor
+            if (neighbors[0] != invalid_index) {
+                enable_button(neighbors[0]);
+            }
+            if (neighbors[1] != invalid_index) {
+                enable_button(neighbors[1]);
+            }
+            if (neighbors[2] != invalid_index) {
+                enable_button(neighbors[2]);
+            }
+            if (neighbors[3] != invalid_index) {
+                enable_button(neighbors[3]);
+            }
+
+            Log.d(TAG, "Index of  all neighbors 0 scramble " + neighbors[0][0] + " " + neighbors[0][1]);
+            Log.d(TAG, "Index of  all neighbors 1 scramble " + neighbors[1][0] + " " + neighbors[1][1]);
+            Log.d(TAG, "Index of  all neighbors 2 scramble " + neighbors[2][0] + " " + neighbors[2][1]);
+            Log.d(TAG, "Index of  all neighbors 3 scramble " + neighbors[3][0] + " " + neighbors[3][1]);
+
+
+            //make a move
+            move_random(neighbors, empty_index);
+
+
+            //disable all buttons
+            disable_all_buttons();
+
+            //find blank space
+            empty_index = find_empty();
+
+
+            //fill neighbors
+            neighbors = fill_neighbors_indexes(empty_index);
+
+            //enable neighbor
+            if (neighbors[0] != invalid_index) {
+                enable_button(neighbors[0]);
+            }
+            if (neighbors[1] != invalid_index) {
+                enable_button(neighbors[1]);
+            }
+            if (neighbors[2] != invalid_index) {
+                enable_button(neighbors[2]);
+            }
+            if (neighbors[3] != invalid_index) {
+                enable_button(neighbors[3]);
+            }
+
         }
-        if(neighbors[1] !=invalid_index){
-            enable_button(neighbors[1]);
+    }
+
+    protected void disable_all_buttons(){
+        bt_1.setEnabled(false);
+        bt_2.setEnabled(false);
+        bt_3.setEnabled(false);
+        bt_4.setEnabled(false);
+        bt_5.setEnabled(false);
+        bt_6.setEnabled(false);
+        bt_7.setEnabled(false);
+        bt_8.setEnabled(false);
+        bt_9.setEnabled(false);
+        bt_10.setEnabled(false);
+        bt_11.setEnabled(false);
+        bt_12.setEnabled(false);
+        bt_13.setEnabled(false);
+        bt_14.setEnabled(false);
+        bt_15.setEnabled(false);
+        bt_16.setEnabled(false);
+    }
+
+    protected void enable_button(int[] button_index){
+        /*
+        Button button_to_enable = button_from_index(button_index);
+        button_to_enable.setEnabled(true);
+        */
+
+        if(button_index[0]==0){
+            switch (button_index[1]){
+                case 0:
+                    bt_1.setEnabled(true);
+                case 1:
+                    bt_2.setEnabled(true);
+                case 2:
+                    bt_3.setEnabled(true);
+                case 3:
+                    bt_4.setEnabled(true);
+            }
+        }else if(button_index[0]==1) {
+            switch (button_index[1]) {
+                case 0:
+                    bt_5.setEnabled(true);
+                case 1:
+                    bt_6.setEnabled(true);
+                case 2:
+                    bt_7.setEnabled(true);
+                case 3:
+                    bt_8.setEnabled(true);
+            }
+        }else if(button_index[0]==2) {
+            switch (button_index[1]) {
+                case 0:
+                    bt_9.setEnabled(true);
+                case 1:
+                    bt_10.setEnabled(true);
+                case 2:
+                    bt_11.setEnabled(true);
+                case 3:
+                    bt_12.setEnabled(true);
+            }
         }
-        if(neighbors[2] !=invalid_index){
-            enable_button(neighbors[2]);
+        else if(button_index[0]==3) {
+            switch (button_index[1]) {
+                case 0:
+                    bt_13.setEnabled(true);
+                case 1:
+                    bt_14.setEnabled(true);
+                case 2:
+                    bt_15.setEnabled(true);
+                case 3:
+                    bt_16.setEnabled(true);
+            }
         }
-        if(neighbors[3] !=invalid_index){
-            enable_button(neighbors[3]);
-        }
-
-        Log.d(TAG, "Index of  all neighbors 0 scramble " + neighbors[0][0] + " " + neighbors[0][1]);
-        Log.d(TAG, "Index of  all neighbors 1 scramble " + neighbors[1][0] + " " + neighbors[1][1]);
-        Log.d(TAG, "Index of  all neighbors 2 scramble " + neighbors[2][0] + " " + neighbors[2][1]);
-        Log.d(TAG, "Index of  all neighbors 3 scramble " + neighbors[3][0] + " " + neighbors[3][1]);
-
-
-        //make a move
-        move_random(neighbors, empty_index);
-
-
 
     }
 
@@ -264,61 +350,6 @@ public class resume_game extends Activity {
         }
 
         return null;
-    }
-
-    protected void enable_button(int[] button_index){
-        /*
-        Button button_to_enable = button_from_index(button_index);
-        button_to_enable.setEnabled(true);
-        */
-
-        if(button_index[0]==0){
-            switch (button_index[1]){
-                case 0:
-                    bt_1.setEnabled(true);
-                case 1:
-                    bt_2.setEnabled(true);
-                case 2:
-                    bt_3.setEnabled(true);
-                case 3:
-                    bt_4.setEnabled(true);
-            }
-        }else if(button_index[0]==1) {
-            switch (button_index[1]) {
-                case 0:
-                    bt_5.setEnabled(true);
-                case 1:
-                    bt_6.setEnabled(true);
-                case 2:
-                    bt_7.setEnabled(true);
-                case 3:
-                    bt_8.setEnabled(true);
-            }
-        }else if(button_index[0]==2) {
-            switch (button_index[1]) {
-                case 0:
-                    bt_9.setEnabled(true);
-                case 1:
-                    bt_10.setEnabled(true);
-                case 2:
-                    bt_11.setEnabled(true);
-                case 3:
-                    bt_12.setEnabled(true);
-            }
-        }
-        else if(button_index[0]==3) {
-            switch (button_index[1]) {
-                case 0:
-                    bt_13.setEnabled(true);
-                case 1:
-                    bt_14.setEnabled(true);
-                case 2:
-                    bt_15.setEnabled(true);
-                case 3:
-                    bt_16.setEnabled(true);
-            }
-        }
-
     }
 
     protected void move_random(int[][] neighbors, int[] empty_index){
