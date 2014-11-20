@@ -2,16 +2,20 @@ package brunamoreira.game_15;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.Random;
+
 
 public class resume_game extends Activity {
 
-    private int[][] board = {{1,2,3,4}, {5,6,7,8}, {9,10,11,12}, {13,14,15,16}};
+    private final static String TAG = "resume_game_activity";
+    private int[][] board = {{1,2,3,4}, {5,6,7,8}, {9,10,11,12}, {13,14,15,0}};
 
     //  buttons
 
@@ -91,6 +95,7 @@ public class resume_game extends Activity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplication(), view.getTag() + " is" + (view.isEnabled() ? " ": " not ") + "enabled", Toast.LENGTH_SHORT).show();
+
             }
         };
         bt_1.setOnClickListener(movement);
@@ -118,60 +123,49 @@ public class resume_game extends Activity {
 
     protected void scramble_board (){
 
+
+        Random rand = new Random();
+        int total_movements = rand.nextInt(500) + 200;
+
         int[] empty_index = new int[] {-1,-1};
         int[][] neighbors = new int[][]{{-1,-1}, {-1,-1}, {-1,-1}, {-1,-1}};
-        //int[]  up_neighbor = new int[] {-1,-1};
-        //int[]  down_neighbor = new int[] {-1,-1};
-        //int[]  left_neighbor = new int[] {-1,-1};
-        //int[]  right_neighbor = new int[] {-1,-1};
+        int[] invalid_index = {-1,-1};
+
 
 
         //find blank space
-
         empty_index = find_empty();
 
 
         //fill neighbors
-
         neighbors = fill_neighbors_indexes(empty_index);
 
-        /*
-        neighbors[0] = new int[]  {(empty_index[0] - 1), empty_index[1]};
-        neighbors[1] = new int[] {(empty_index[0] + 1), empty_index[1]};
-        neighbors[2] = new int[] {empty_index[0], (empty_index[1] - 1)};
-        neighbors[3] = new int[] {empty_index[0], (empty_index[1]+ 1)};
-
-
-        if(empty_index[0] ==0){
-            neighbors[0] = null;
-        }else if(empty_index[0] == 3){
-            neighbors[1] = null;
-        }
-
-        if (empty_index[1]== 0){
-            neighbors[2] = null;
-        }else if (empty_index[1] == 3){
-            neighbors[3] = null;
-        }
-        */
-
-
         //enable neighbor
-        if(neighbors[0] !=null){
+        if(neighbors[0] !=invalid_index){
             enable_button(neighbors[0]);
         }
-        if(neighbors[1] !=null){
+        if(neighbors[1] !=invalid_index){
             enable_button(neighbors[1]);
         }
-        if(neighbors[2] !=null){
+        if(neighbors[2] !=invalid_index){
             enable_button(neighbors[2]);
         }
-        if(neighbors[3] !=null){
+        if(neighbors[3] !=invalid_index){
             enable_button(neighbors[3]);
         }
 
-    }
+        Log.d(TAG, "Index of  all neighbors 0 scramble " + neighbors[0][0] + " " + neighbors[0][1]);
+        Log.d(TAG, "Index of  all neighbors 1 scramble " + neighbors[1][0] + " " + neighbors[1][1]);
+        Log.d(TAG, "Index of  all neighbors 2 scramble " + neighbors[2][0] + " " + neighbors[2][1]);
+        Log.d(TAG, "Index of  all neighbors 3 scramble " + neighbors[3][0] + " " + neighbors[3][1]);
 
+
+        //make a move
+        move_random(neighbors, empty_index);
+
+
+
+    }
 
     protected int[] find_empty (){
         int[] empty_index = new int[] {-1,-1};
@@ -184,6 +178,8 @@ public class resume_game extends Activity {
                 }
             }
         }
+
+        Log.d(TAG, "Index of blank in find_empty" + empty_index[0] + " " + empty_index[1]);
         return empty_index;
     }
 
@@ -191,95 +187,180 @@ public class resume_game extends Activity {
 
         int[][] neighbors = new int[][]{{-1,-1}, {-1,-1}, {-1,-1}, {-1,-1}};
 
-        neighbors[0] = new int[]  {(empty_index[0] - 1), empty_index[1]};
-        neighbors[1] = new int[] {(empty_index[0] + 1), empty_index[1]};
-        neighbors[2] = new int[] {empty_index[0], (empty_index[1] - 1)};
-        neighbors[3] = new int[] {empty_index[0], (empty_index[1]+ 1)};
 
-
-        if(empty_index[0] ==0){
-            neighbors[0] = null;
-        }else if(empty_index[0] == 3){
-            neighbors[1] = null;
+        if(empty_index[0] !=0){
+            neighbors[0] = new int[]  {(empty_index[0] - 1), empty_index[1]};
+            //neighbors[0] = null;
+        }else if(empty_index[0] != 3){
+            neighbors[1] = new int[] {(empty_index[0] + 1), empty_index[1]};
+            //neighbors[1] = null;
         }
 
-        if (empty_index[1]== 0){
-            neighbors[2] = null;
-        }else if (empty_index[1] == 3){
-            neighbors[3] = null;
+        if (empty_index[1]!= 0){
+            neighbors[2] = new int[] {empty_index[0], (empty_index[1] - 1)};
+            //neighbors[2] = null;
+        }else if (empty_index[1] != 3){
+            neighbors[3] = new int[] {empty_index[0], (empty_index[1]+ 1)};
+            //neighbors[3] = null;
         }
 
         return neighbors;
     }
 
+    protected Button button_from_index(int[] button_index){
+
+        if(button_index[0]==0){
+            switch (button_index[1]){
+                case 0:
+                    return bt_1;
+                case 1:
+                    return bt_2;
+                case 2:
+                    return bt_3;
+                case 3:
+                    return bt_4;
+            }
+        }else if(button_index[0]==1) {
+            switch (button_index[1]) {
+                case 0:
+                    return bt_5;
+                case 1:
+                    return bt_6;
+                case 2:
+                    return bt_7;
+                case 3:
+                    return bt_8;
+            }
+        }else if(button_index[0]==2) {
+            switch (button_index[1]) {
+                case 0:
+                    return bt_9;
+                case 1:
+                    return bt_10;
+                case 2:
+                    return bt_11;
+                case 3:
+                    return bt_12;
+            }
+        }
+        else if(button_index[0]==3) {
+            switch (button_index[1]) {
+                case 0:
+                    return bt_13;
+                case 1:
+                    return bt_14;
+                case 2:
+                    return bt_15;
+                case 3:
+                    return bt_16;
+            }
+        }
+
+        return null;
+    }
+
     protected void enable_button(int[] button_index){
+        /*
+        Button button_to_enable = button_from_index(button_index);
+        button_to_enable.setEnabled(true);
+        */
 
         if(button_index[0]==0){
             switch (button_index[1]){
                 case 0:
                     bt_1.setEnabled(true);
-                    break;
                 case 1:
                     bt_2.setEnabled(true);
-                    break;
                 case 2:
                     bt_3.setEnabled(true);
-                    break;
                 case 3:
                     bt_4.setEnabled(true);
-                    break;
             }
         }else if(button_index[0]==1) {
             switch (button_index[1]) {
                 case 0:
                     bt_5.setEnabled(true);
-                    break;
                 case 1:
                     bt_6.setEnabled(true);
-                    break;
                 case 2:
                     bt_7.setEnabled(true);
-                    break;
                 case 3:
                     bt_8.setEnabled(true);
-                    break;
             }
         }else if(button_index[0]==2) {
             switch (button_index[1]) {
                 case 0:
                     bt_9.setEnabled(true);
-                    break;
                 case 1:
                     bt_10.setEnabled(true);
-                    break;
                 case 2:
                     bt_11.setEnabled(true);
-                    break;
                 case 3:
                     bt_12.setEnabled(true);
-                    break;
             }
         }
         else if(button_index[0]==3) {
             switch (button_index[1]) {
                 case 0:
                     bt_13.setEnabled(true);
-                    break;
                 case 1:
                     bt_14.setEnabled(true);
-                    break;
                 case 2:
                     bt_15.setEnabled(true);
-                    break;
                 case 3:
                     bt_16.setEnabled(true);
-                    break;
             }
         }
 
     }
 
+    protected void move_random(int[][] neighbors, int[] empty_index){
 
+        int possible_moves=0;
+        int neighbor_to_move=0;
+        int[] invalid_index = {-1,-1};
+        Random rand = new Random();
+
+        for(int i=0; i<4;i++){
+            if(neighbors[i] != invalid_index){
+                possible_moves++;
+            }
+        }
+
+
+        while(neighbors[neighbor_to_move] == invalid_index ) {
+            neighbor_to_move = rand.nextInt(possible_moves);
+        }
+
+        Log.d(TAG, "Index of blank in move_random" + empty_index[0]+" "+empty_index[1]);
+        //Log.d(TAG, "Index of  all neighbors 0 move " + neighbors[0][0] + " " + neighbors[0][1]);
+        //Log.d(TAG, "Index of  all neighbors 1 move " + neighbors[1][0] + " " + neighbors[1][1]);
+        //Log.d(TAG, "Index of  all neighbors 2 move " + neighbors[2][0] + " " + neighbors[2][1]);
+        //Log.d(TAG, "Index of  all neighbors 3 move " + neighbors[3][0] + " " + neighbors[3][1]);
+
+        //swap 0(empty) and neighbor  === array
+        int temp = board[empty_index[0]][empty_index[1]];
+        board[empty_index[0]] [empty_index[1]] = board[neighbors[neighbor_to_move][0]][neighbors[neighbor_to_move][1]];
+        board[neighbors[neighbor_to_move][0]][neighbors[neighbor_to_move][1]] = temp;
+
+
+        //swap button Text   === screen
+        Button empty = button_from_index(empty_index);
+        Button bt_movement = button_from_index(neighbors[neighbor_to_move]);
+
+        move_button_text(empty, bt_movement);
+
+
+
+    }
+
+    protected void move_button_text(Button empty, Button move){
+
+        String temp = (String) empty.getText();
+        empty.setText(move.getText());
+        move.setText(temp);
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
