@@ -1,6 +1,7 @@
 package brunamoreira.game_15;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -36,6 +37,7 @@ public class resume_game extends Activity {
     Button bt_15;
     Button bt_16;
     Button bt_scramble;
+    Button bt_home;
 
 
 
@@ -61,6 +63,7 @@ public class resume_game extends Activity {
         bt_15 = (Button) findViewById(R.id.button15);
         bt_16 = (Button) findViewById(R.id.button16);
         bt_scramble = (Button) findViewById(R.id.button_scramble);
+        bt_home = (Button) findViewById(R.id.bt_home);
 
         disable_all_buttons();
 
@@ -102,7 +105,14 @@ public class resume_game extends Activity {
         bt_16.setOnClickListener(movement);
 
 
-
+        View.OnClickListener go_home_listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent go_home_intent = new Intent(resume_game.this, menu.class);
+                startActivity(go_home_intent);
+            }
+        };
+        bt_home.setOnClickListener(go_home_listener);
 
 
     }
