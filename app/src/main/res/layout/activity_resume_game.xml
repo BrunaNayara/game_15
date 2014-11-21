@@ -44,28 +44,32 @@
                 android:layout_height="wrap_content"
                 android:tag="1"
                 android:text="@string/bt_1"
-                android:id="@+id/button1" />
+                android:id="@+id/button1"
+                android:background="@drawable/bt_1"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:tag="2"
                 android:text="@string/bt_2"
-                android:id="@+id/button2" />
+                android:id="@+id/button2"
+                android:background="@drawable/bt_2"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:tag="3"
                 android:text="@string/bt_3"
-                android:id="@+id/button3" />
+                android:id="@+id/button3"
+                android:background="@drawable/bt_3"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:tag="4"
                 android:text="@string/bt_4"
-                android:id="@+id/button4" />
+                android:id="@+id/button4"
+                android:background="@drawable/bt_4"/>
         </TableRow>
 
         <TableRow
@@ -77,28 +81,32 @@
                 android:layout_height="wrap_content"
                 android:tag="5"
                 android:text="@string/bt_5"
-                android:id="@+id/button5" />
+                android:id="@+id/button5"
+                android:background="@drawable/bt_5"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:tag="6"
                 android:text="@string/bt_6"
-                android:id="@+id/button6" />
+                android:id="@+id/button6"
+                android:background="@drawable/bt_6"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:tag="7"
                 android:text="@string/bt_7"
-                android:id="@+id/button7" />
+                android:id="@+id/button7"
+                android:background="@drawable/bt_7"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:tag="8"
                 android:text="@string/bt_8"
-                android:id="@+id/button8" />
+                android:id="@+id/button8"
+                android:background="@drawable/bt_8"/>
         </TableRow>
 
         <TableRow
@@ -110,28 +118,32 @@
                 android:layout_height="wrap_content"
                 android:tag="9"
                 android:text="@string/bt_9"
-                android:id="@+id/button9" />
+                android:id="@+id/button9"
+                android:background="@drawable/bt_9"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:tag="10"
                 android:text="@string/bt_10"
-                android:id="@+id/button10" />
+                android:id="@+id/button10"
+                android:background="@drawable/bt_10"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:tag="11"
                 android:text="@string/bt_11"
-                android:id="@+id/button11" />
+                android:id="@+id/button11"
+                android:background="@drawable/bt_11"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:tag="12"
                 android:text="@string/bt_12"
-                android:id="@+id/button12" />
+                android:id="@+id/button12"
+                android:background="@drawable/bt_12"/>
         </TableRow>
 
         <TableRow
@@ -143,28 +155,34 @@
                 android:layout_height="wrap_content"
                 android:tag="13"
                 android:text="@string/bt_13"
-                android:id="@+id/button13" />
+                android:id="@+id/button13"
+                android:background="@drawable/bt_13"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:tag="14"
                 android:text="@string/bt_14"
-                android:id="@+id/button14" />
+                android:id="@+id/button14"
+                android:background="@drawable/bt_14"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:tag="15"
                 android:text="@string/bt_15"
-                android:id="@+id/button15" />
+                android:id="@+id/button15"
+                android:background="@drawable/bt_15"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:tag="16"
                 android:text="@string/bt_blank"
-                android:id="@+id/button16" />
+                android:id="@+id/button16"
+                
+                />
+
         </TableRow>
     </TableLayout>
 
