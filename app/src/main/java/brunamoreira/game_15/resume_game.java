@@ -80,6 +80,7 @@ public class resume_game extends Activity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplication(), view.getTag() + " is" + (view.isEnabled() ? " ": " not ") + "enabled", Toast.LENGTH_SHORT).show();
+                make_a_move(view);
 
             }
         };
@@ -101,6 +102,46 @@ public class resume_game extends Activity {
         bt_16.setOnClickListener(movement);
 
 
+
+
+
+    }
+
+    private void make_a_move(View view) {
+
+        Button empty_button;
+        int[] button_index;
+        int[] empty;
+        int[] invalid_index = {-1,-1};
+        int[][] neighbors;
+
+        //fill values
+        empty = find_empty();
+        empty_button = button_from_index(empty);
+        button_index = index_from_button((Button)view);
+
+        //make a move
+        move_in_array(empty, button_index);
+        move_button_text((Button) empty_button, (Button) view );
+
+        //disable all buttons
+        disable_all_buttons();
+
+        //find and enable neighbors
+        empty = find_empty();
+        neighbors = fill_neighbors_indexes(empty);
+        if (neighbors[0] != invalid_index) {
+            enable_button(neighbors[0]);
+        }
+        if (neighbors[1] != invalid_index) {
+            enable_button(neighbors[1]);
+        }
+        if (neighbors[2] != invalid_index) {
+            enable_button(neighbors[2]);
+        }
+        if (neighbors[3] != invalid_index) {
+            enable_button(neighbors[3]);
+        }
 
 
 
@@ -320,6 +361,62 @@ public class resume_game extends Activity {
         Log.d(TAG, "Index of  all neighbors 3 move " + neighbors[3][0] + " " + neighbors[3][1]);
 
         return neighbors;
+    }
+
+    protected  int[] index_from_button(Button button){
+        int[] index = {-1,-1};
+        //final CharSequence tag_1 = (CharSequence) bt_1.getTag();
+
+        if(button.getTag() == bt_1.getTag()){
+          return new int[] {0,0};
+        }
+        if(button.getTag() == bt_2.getTag()){
+            return new int[] {0,1};
+        }
+        if(button.getTag() == bt_3.getTag()){
+            return new int[] {0,2};
+        }
+        if(button.getTag() == bt_4.getTag()){
+            return new int[] {0,3};
+        }
+        if(button.getTag() == bt_5.getTag()){
+            return new int[] {1,0};
+        }
+        if(button.getTag() == bt_6.getTag()){
+            return new int[] {1,1};
+        }
+        if(button.getTag() == bt_7.getTag()){
+            return new int[] {1,2};
+        }
+        if(button.getTag() == bt_8.getTag()){
+            return new int[] {1,3};
+        }
+        if(button.getTag() == bt_9.getTag()){
+            return new int[] {2,0};
+        }
+        if(button.getTag() == bt_10.getTag()){
+            return new int[] {2,1};
+        }
+        if(button.getTag() == bt_11.getTag()){
+            return new int[] {2,2};
+        }
+        if(button.getTag() == bt_12.getTag()){
+            return new int[] {2,3};
+        }
+        if(button.getTag() == bt_13.getTag()){
+            return new int[] {3,0};
+        }
+        if(button.getTag() == bt_14.getTag()){
+            return new int[] {3,1};
+        }
+        if(button.getTag() == bt_15.getTag()){
+            return new int[] {3,2};
+        }
+        if(button.getTag() == bt_16.getTag()){
+            return new int[] {3,3};
+        }
+
+        return index;
     }
 
     protected Button button_from_index(int[] button_index){
