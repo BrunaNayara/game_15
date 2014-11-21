@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.Arrays;
 import java.util.Random;
 
 
@@ -83,7 +84,7 @@ public class resume_game extends Activity {
         View.OnClickListener movement = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplication(), view.getTag() + " is" + (view.isEnabled() ? " ": " not ") + "enabled", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplication(), view.getTag() + " is" + (view.isEnabled() ? " ": " not ") + "enabled", Toast.LENGTH_SHORT).show();
                 make_a_move(view);
 
             }
@@ -154,7 +155,8 @@ public class resume_game extends Activity {
             enable_button(neighbors[3]);
         }
 
-
+        //try winner?
+        win();
 
     }
 
@@ -547,14 +549,21 @@ public class resume_game extends Activity {
 
     }
 
-
-
     protected void move_button_image(Button empty, Button move){
         //int image_move_button = move.getBackground();
         Drawable image_empty = empty.getBackground();
         empty.setBackground(move.getBackground());
         move.setBackground(image_empty);
 
+    }
+
+    protected void win (){
+        final int[][] winner_board = {{1,2,3,4}, {5,6,7,8}, {9,10,11,12}, {13,14,15,0}};
+
+
+        if (Arrays.deepEquals(winner_board, board)){
+            Toast.makeText(getApplication(), " You are a winner!", Toast.LENGTH_SHORT ).show();
+        }
     }
 
     @Override
