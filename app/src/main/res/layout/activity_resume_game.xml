@@ -5,12 +5,27 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@drawable/background">
 
-    <TextView
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
-        android:id="@+id/textView" />
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/bt_home"
+            android:background="@drawable/bt_home"
+            android:layout_margin="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/shake_to_scramble"
+            android:id="@+id/textView"
+            android:layout_margin="20dp"/>
+    </LinearLayout>
 
     <TableLayout
         android:layout_width="wrap_content"
