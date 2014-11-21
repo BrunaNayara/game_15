@@ -2,11 +2,36 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/background">
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:id="@+id/button"
+        android:background="@drawable/name"
+        android:layout_gravity="center"
+        android:layout_margin="40dp"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Start"
-        android:id="@+id/button_start" />
+        android:id="@+id/button_start"
+        android:background="@drawable/bt_start"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_margin="20dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Configuration"
+        android:id="@+id/button_config"
+        android:background="@drawable/bt_start"
+        android:layout_gravity="center"
+        android:gravity="center"/>
+
 </LinearLayout>
