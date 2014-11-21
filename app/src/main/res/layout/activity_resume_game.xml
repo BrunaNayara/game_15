@@ -7,8 +7,9 @@
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp">
 
         <Button
             android:layout_width="wrap_content"
@@ -18,13 +19,7 @@
             android:background="@drawable/bt_home"
             android:layout_margin="20dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/shake_to_scramble"
-            android:id="@+id/textView"
-            android:layout_margin="20dp"/>
+
     </LinearLayout>
 
     <TableLayout
@@ -32,7 +27,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_weight="1"
-        android:id="@+id/table_channel">
+        android:id="@+id/table_channel"
+        android:layout_marginTop="20dp">
 
         <TableRow
             android:layout_width="fill_parent"
@@ -193,12 +189,25 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="20dp">
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/shake_to_scramble"
+            android:id="@+id/shake_to_scramble"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/press_to_scramble"
+            android:id="@+id/press_to_scramble"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Scramble"
-            android:id="@+id/button_scramble" />
+            android:id="@+id/button_scramble"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"/>
     </LinearLayout>
 
 </LinearLayout>
