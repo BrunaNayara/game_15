@@ -2,6 +2,7 @@ package brunamoreira.game_15;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -542,11 +543,19 @@ public class resume_game extends Activity {
         String temp = (String) empty.getText();
         empty.setText(move.getText());
         move.setText(temp);
+        move_button_image(empty, move);
 
     }
 
 
 
+    protected void move_button_image(Button empty, Button move){
+        //int image_move_button = move.getBackground();
+        Drawable image_empty = empty.getBackground();
+        empty.setBackground(move.getBackground());
+        move.setBackground(image_empty);
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

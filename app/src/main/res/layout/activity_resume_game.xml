@@ -180,7 +180,7 @@
                 android:tag="16"
                 android:text="@string/bt_blank"
                 android:id="@+id/button16"
-                
+                android:background="@drawable/bt_home"
                 />
 
         </TableRow>
