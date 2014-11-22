@@ -620,7 +620,7 @@ public class resume_game extends Activity {
             float delta = current_accel - last_accel;
             accel = accel * 0.9f + delta;
 
-            if(accel>2){
+            if(accel>10){
                 //Toast.makeText(getApplication(), "Shake!", Toast.LENGTH_SHORT).show();
                 vibrate.vibrate(500);
                 scramble_board();

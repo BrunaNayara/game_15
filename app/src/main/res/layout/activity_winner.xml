@@ -10,16 +10,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/congratulations"
-        android:textSize="40dp"
+        android:textSize="40sp"
         android:id="@+id/congrats"
         android:layout_gravity="center"
-        android:layout_margin="20dp"/>
+        android:layout_margin="20sp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/your_time"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:id="@+id/time_text"
         android:layout_gravity="center"
         />
@@ -27,11 +27,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:text="@string/bt_1"
         android:id="@+id/chrono_time"
         android:layout_gravity="center"
-        android:layout_margin="20dp"/>
+        android:layout_margin="20sp"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -49,6 +49,6 @@
         android:id="@+id/winner_home_button"
         android:layout_gravity="center"
         android:gravity="bottom"
-        android:layout_margin="60dp"/>
+        android:layout_margin="60sp"/>
 
 </LinearLayout>
