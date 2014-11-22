@@ -9,6 +9,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,6 +30,8 @@ public class resume_game extends Activity {
     private float accel;
     private float current_accel;
     private float last_accel;
+
+    Vibrator vibrate;
 
     //  buttons
     Button bt_1;
@@ -56,6 +59,8 @@ public class resume_game extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resume_game);
+
+        vibrate = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
         sensor = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         sensor.registerListener(sensor_listener, sensor.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
@@ -602,6 +607,7 @@ public class resume_game extends Activity {
 
             if(accel>2){
                 //Toast.makeText(getApplication(), "Shake!", Toast.LENGTH_SHORT).show();
+                vibrate.vibrate(500);
                 scramble_board();
             }
         }
