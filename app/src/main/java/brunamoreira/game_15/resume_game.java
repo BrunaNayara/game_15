@@ -9,12 +9,14 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.Toast;
 
 import java.util.Arrays;
@@ -32,6 +34,8 @@ public class resume_game extends Activity {
     private float last_accel;
 
     Vibrator vibrate;
+
+    Chronometer chrono;
 
     //  buttons
     Button bt_1;
@@ -67,6 +71,8 @@ public class resume_game extends Activity {
         accel = 0.00f;
         current_accel = SensorManager.GRAVITY_EARTH;
         last_accel = SensorManager.GRAVITY_EARTH;
+
+        chrono = (Chronometer) findViewById(R.id.chronometer);
 
         bt_1 = (Button) findViewById(R.id.button1);
         bt_2 = (Button) findViewById(R.id.button2);
@@ -258,7 +264,8 @@ public class resume_game extends Activity {
         }
 
 
-
+        chrono.setBase(SystemClock.elapsedRealtime());
+        chrono.start();
 
     }
 
@@ -582,13 +589,18 @@ public class resume_game extends Activity {
 
     protected void win (){
         final int[][] winner_board = {{1,2,3,4}, {5,6,7,8}, {9,10,11,12}, {13,14,15,0}};
-
+        long time_elapsed;
 
         if (Arrays.deepEquals(winner_board, board)){
             //Toast.makeText(getApplication(), " You are a winner!", Toast.LENGTH_SHORT ).show();
             Intent winner_page = new Intent(resume_game.this, winner.class);
+            chrono.stop();
+            time_elapsed = SystemClock.elapsedRealtime() - chrono.getBase();
+            winner_page.putExtra("Chronometer", time_elapsed);
             startActivity(winner_page);
         }
+
+
     }
 
     //sensor
