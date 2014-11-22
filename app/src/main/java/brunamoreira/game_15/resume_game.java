@@ -596,7 +596,10 @@ public class resume_game extends Activity {
             Intent winner_page = new Intent(resume_game.this, winner.class);
             chrono.stop();
             time_elapsed = SystemClock.elapsedRealtime() - chrono.getBase();
-            winner_page.putExtra("Chronometer", time_elapsed);
+            int minutes = (int) (time_elapsed/60000);
+            int seconds = (int) (time_elapsed- minutes * 60000)/1000;
+            String time = new String(minutes+ ":" +seconds);
+            winner_page.putExtra("Time", time);
             startActivity(winner_page);
         }
 

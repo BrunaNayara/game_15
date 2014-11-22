@@ -11,7 +11,25 @@
         android:layout_height="wrap_content"
         android:text="@string/congratulations"
         android:textSize="40dp"
-        android:id="@+id/textView"
+        android:id="@+id/congrats"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/your_time"
+        android:textSize="30dp"
+        android:id="@+id/time_text"
+        android:layout_gravity="center"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:text="@string/bt_1"
+        android:id="@+id/chrono_time"
         android:layout_gravity="center"
         android:layout_margin="20dp"/>
 
@@ -22,7 +40,7 @@
         android:layout_gravity="center_horizontal"
         android:background="@drawable/star"
         android:gravity="center"
-        android:layout_margin="50dp"/>
+        android:layout_margin_top="30dp"/>
 
     <Button
         android:layout_width="wrap_content"

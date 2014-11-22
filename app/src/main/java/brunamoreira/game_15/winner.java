@@ -7,17 +7,29 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 public class winner extends Activity {
 
     Button bt_home;
+    Intent intent_from;
+    TextView time;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_winner);
 
+        time = (TextView) findViewById(R.id.chrono_time);
         bt_home = (Button) findViewById(R.id.winner_home_button);
+        intent_from = getIntent();
+
+
+
+        time.setText(intent_from.getStringExtra("Time"));
+
 
         View.OnClickListener go_home_listener = new View.OnClickListener() {
             @Override

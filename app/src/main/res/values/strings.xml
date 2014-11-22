@@ -9,6 +9,7 @@
     <string name="shake_to_scramble">Shake to scramble </string>
     <string name="press_to_scramble">or press the button</string>
     <string name="title_activity_resume_game">resume_game</string>
+    <string name="your_time">Your time: </string>
     <string name="bt_1">1</string>
     <string name="bt_2">2</string>
     <string name="bt_3">3</string>
