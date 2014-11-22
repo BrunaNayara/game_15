@@ -26,6 +26,7 @@ public class winner extends Activity {
                 startActivity(go_home_intent);
             }
         };
+        bt_home.setOnClickListener(go_home_listener);
 
     }
 
