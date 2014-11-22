@@ -1,8 +1,13 @@
 package brunamoreira.game_15;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -20,8 +25,12 @@ public class resume_game extends Activity {
     private final static String TAG = "resume_game_activity";
     private int[][] board = {{1,2,3,4}, {5,6,7,8}, {9,10,11,12}, {13,14,15,0}};
 
-    //  buttons
+    private SensorManager sensor;
+    private float accel;
+    private float current_accel;
+    private float last_accel;
 
+    //  buttons
     Button bt_1;
     Button bt_2;
     Button bt_3;
@@ -47,6 +56,12 @@ public class resume_game extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resume_game);
+
+        sensor = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        sensor.registerListener(sensor_listener, sensor.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
+        accel = 0.00f;
+        current_accel = SensorManager.GRAVITY_EARTH;
+        last_accel = SensorManager.GRAVITY_EARTH;
 
         bt_1 = (Button) findViewById(R.id.button1);
         bt_2 = (Button) findViewById(R.id.button2);
@@ -115,6 +130,9 @@ public class resume_game extends Activity {
             }
         };
         bt_home.setOnClickListener(go_home_listener);
+
+
+
 
 
     }
@@ -566,6 +584,43 @@ public class resume_game extends Activity {
             Intent winner_page = new Intent(resume_game.this, winner.class);
             startActivity(winner_page);
         }
+    }
+
+    //sensor
+
+    private final SensorEventListener sensor_listener = new SensorEventListener() {
+        @Override
+        public void onSensorChanged(SensorEvent sensorEvent) {
+            float x = sensorEvent.values[0];
+            float y = sensorEvent.values[1];
+            float z = sensorEvent.values[2];
+
+            last_accel = current_accel;
+            current_accel = (float) Math.sqrt((double) x*x + y*y + z*z);
+            float delta = current_accel - last_accel;
+            accel = accel * 0.9f + delta;
+
+            if(accel>2){
+                Toast.makeText(getApplication(), "Shake!", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int i) {
+
+        }
+    };
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        sensor.registerListener(sensor_listener, sensor.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    @Override
+    protected void onPause(){
+        sensor.unregisterListener(sensor_listener);
+        super.onPause();
     }
 
     @Override
