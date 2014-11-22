@@ -20,6 +20,10 @@
             android:name=".resume_game"
             android:label="@string/title_activity_resume_game" >
         </activity>
+        <activity
+            android:name=".winner"
+            android:label="@string/title_activity_winner" >
+        </activity>
     </application>
 
 </manifest>

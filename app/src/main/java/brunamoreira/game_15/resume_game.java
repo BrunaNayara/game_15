@@ -562,7 +562,9 @@ public class resume_game extends Activity {
 
 
         if (Arrays.deepEquals(winner_board, board)){
-            Toast.makeText(getApplication(), " You are a winner!", Toast.LENGTH_SHORT ).show();
+            //Toast.makeText(getApplication(), " You are a winner!", Toast.LENGTH_SHORT ).show();
+            Intent winner_page = new Intent(resume_game.this, winner.class);
+            startActivity(winner_page);
         }
     }
 
