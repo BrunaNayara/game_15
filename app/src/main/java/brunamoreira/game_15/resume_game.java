@@ -601,7 +601,8 @@ public class resume_game extends Activity {
             accel = accel * 0.9f + delta;
 
             if(accel>2){
-                Toast.makeText(getApplication(), "Shake!", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplication(), "Shake!", Toast.LENGTH_SHORT).show();
+                scramble_board();
             }
         }
 
